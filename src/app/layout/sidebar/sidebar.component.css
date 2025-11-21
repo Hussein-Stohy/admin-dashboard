@@ -1,0 +1,54 @@
+/* Sidebar specific styles */
+.sidebar-link {
+  @apply flex items-center px-4 py-3 rounded-lg text-gray-700 dark:text-gray-200 
+         hover:bg-primary-50 hover:text-primary-600 dark:hover:bg-gray-700 
+         dark:hover:text-primary-400 transition-colors duration-200;
+}
+
+.sidebar-link.active {
+  @apply bg-primary-100 text-primary-700 dark:bg-primary-900/20 dark:text-primary-400;
+}
+
+.sidebar-link.active svg {
+  @apply text-primary-600 dark:text-primary-400;
+}
+
+/* Animation for collapse/expand */
+.sidebar-transition {
+  transition: width 300ms ease-in-out;
+}
+
+/* User section styles */
+.user-section {
+  @apply flex items-center;
+}
+
+.user-section.collapsed {
+  @apply justify-center;
+}
+
+/* Badge styles */
+.nav-badge {
+  @apply ml-2 bg-primary-100 text-primary-800 text-xs font-medium px-2.5 py-0.5 
+         rounded-full dark:bg-primary-900 dark:text-primary-300 flex-shrink-0;
+}
+
+/* Icon container */
+.icon-container {
+  @apply w-6 h-6 text-current flex-shrink-0;
+}
+
+.icon-container svg {
+  @apply w-6 h-6;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .sidebar-mobile {
+    @apply fixed inset-y-0 left-0 z-50 w-64 transform -translate-x-full transition-transform duration-300 ease-in-out;
+  }
+  
+  .sidebar-mobile.open {
+    @apply translate-x-0;
+  }
+}

@@ -1,0 +1,265 @@
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-4 lg:space-y-0">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white">📊 Analytics Dashboard</h1>
+      <p class="text-gray-600 dark:text-gray-400 mt-2">Comprehensive analytics and insights for your business performance</p>
+    </div>
+    
+    <form [formGroup]="filterForm">
+      <div class="flex items-center space-x-4">
+        <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500" formControlName="period">
+          <option value="7d">Last 7 days</option>
+          <option value="30d">Last 30 days</option>
+          <option value="90d">Last 3 months</option>
+          <option value="1y">Last year</option>
+        </select>
+        
+        <app-button variant="primary" (clicked)="refreshData()">
+          <svg slot="icon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Refresh
+        </app-button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Key Metrics Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <app-card class="text-center hover:shadow-lg transition-shadow">
+      <div class="flex items-center justify-center w-12 h-12 mx-auto mb-3 rounded-full bg-blue-100 dark:bg-blue-900/20">
+        <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+        </svg>
+      </div>
+      <div class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{totalRevenue | currency}}</div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">Total Revenue</div>
+      <div class="text-xs text-green-600 dark:text-green-400 font-medium mt-1">+23% from last month</div>
+    </app-card>
+    
+    <app-card class="text-center hover:shadow-lg transition-shadow">
+      <div class="flex items-center justify-center w-12 h-12 mx-auto mb-3 rounded-full bg-green-100 dark:bg-green-900/20">
+        <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+        </svg>
+      </div>
+      <div class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{totalOrders}}</div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">Total Orders</div>
+      <div class="text-xs text-green-600 dark:text-green-400 font-medium mt-1">+8% from last month</div>
+    </app-card>
+    
+    <app-card class="text-center hover:shadow-lg transition-shadow">
+      <div class="flex items-center justify-center w-12 h-12 mx-auto mb-3 rounded-full bg-purple-100 dark:bg-purple-900/20">
+        <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+        </svg>
+      </div>
+      <div class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{activeUsers}}</div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">Active Users</div>
+      <div class="text-xs text-green-600 dark:text-green-400 font-medium mt-1">+12% from last month</div>
+    </app-card>
+    
+    <app-card class="text-center hover:shadow-lg transition-shadow">
+      <div class="flex items-center justify-center w-12 h-12 mx-auto mb-3 rounded-full bg-orange-100 dark:bg-orange-900/20">
+        <svg class="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+        </svg>
+      </div>
+      <div class="text-3xl font-bold text-gray-900 dark:text-white mb-2">{{conversionRate}}%</div>
+      <div class="text-sm text-gray-600 dark:text-gray-400">Conversion Rate</div>
+      <div class="text-xs text-red-600 dark:text-red-400 font-medium mt-1">-2% from last month</div>
+    </app-card>
+  </div>
+
+  <!-- Main Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Revenue Trends Chart -->
+    <app-card>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">💰 Revenue Trends</h3>
+        <div class="text-sm text-gray-500 dark:text-gray-400">Last 6 months</div>
+      </div>
+      <div class="h-80">
+        <app-chart 
+          type="line"
+          [data]="revenueChartData"
+          [options]="lineChartOptions">
+        </app-chart>
+      </div>
+    </app-card>
+
+    <!-- User Growth Chart -->
+    <app-card>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">👥 User Growth</h3>
+        <div class="text-sm text-gray-500 dark:text-gray-400">Weekly data</div>
+      </div>
+      <div class="h-80">
+        <app-chart 
+          type="bar"
+          [data]="userGrowthChartData"
+          [options]="barChartOptions">
+        </app-chart>
+      </div>
+    </app-card>
+  </div>
+
+  <!-- Secondary Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Order Status Distribution -->
+    <app-card>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">📦 Order Status Distribution</h3>
+        <div class="text-sm text-gray-500 dark:text-gray-400">Current month</div>
+      </div>
+      <div class="h-80">
+        <app-chart 
+          type="pie"
+          [data]="ordersStatusChartData"
+          [options]="pieChartOptions">
+        </app-chart>
+      </div>
+    </app-card>
+
+    <!-- Product Categories -->
+    <app-card>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">🏷️ Product Categories</h3>
+        <div class="text-sm text-gray-500 dark:text-gray-400">By quantity</div>
+      </div>
+      <div class="h-80">
+        <app-chart 
+          type="doughnut"
+          [data]="productCategoriesChartData"
+          [options]="doughnutChartOptions">
+        </app-chart>
+      </div>
+    </app-card>
+  </div>
+
+  <!-- Additional Charts Section -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Monthly Sales Performance -->
+    <app-card>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">📈 Monthly Sales Performance</h3>
+        <div class="text-sm text-gray-500 dark:text-gray-400">This year</div>
+      </div>
+      <div class="h-80">
+        <app-chart 
+          type="line"
+          [data]="monthlySalesChartData"
+          [options]="areaChartOptions">
+        </app-chart>
+      </div>
+    </app-card>
+
+    <!-- Top Products -->
+    <app-card>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">🏆 Top Products</h3>
+        <div class="text-sm text-gray-500 dark:text-gray-400">Best sellers</div>
+      </div>
+      <div class="h-80">
+        <app-chart 
+          type="bar"
+          [data]="topProductsChartData"
+          [options]="horizontalBarChartOptions">
+        </app-chart>
+      </div>
+    </app-card>
+  </div>
+
+  <!-- Additional Insights -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <app-card>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">📊 Quick Stats</h3>
+      <div class="space-y-4">
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-gray-600 dark:text-gray-400">Average Order Value</span>
+          <span class="font-semibold text-gray-900 dark:text-white">$127.50</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-gray-600 dark:text-gray-400">Customer Lifetime Value</span>
+          <span class="font-semibold text-gray-900 dark:text-white">$1,234</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-gray-600 dark:text-gray-400">Return Customer Rate</span>
+          <span class="font-semibold text-gray-900 dark:text-white">34.2%</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-gray-600 dark:text-gray-400">Churn Rate</span>
+          <span class="font-semibold text-red-600 dark:text-red-400">2.1%</span>
+        </div>
+      </div>
+    </app-card>
+
+    <app-card>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">🎯 Goals Progress</h3>
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-gray-600 dark:text-gray-400">Monthly Revenue</span>
+            <span class="font-semibold text-gray-900 dark:text-white">87%</span>
+          </div>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div class="bg-blue-600 h-2 rounded-full" style="width: 87%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-gray-600 dark:text-gray-400">New Customers</span>
+            <span class="font-semibold text-gray-900 dark:text-white">92%</span>
+          </div>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div class="bg-green-600 h-2 rounded-full" style="width: 92%"></div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span class="text-gray-600 dark:text-gray-400">Product Sales</span>
+            <span class="font-semibold text-gray-900 dark:text-white">76%</span>
+          </div>
+          <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+            <div class="bg-purple-600 h-2 rounded-full" style="width: 76%"></div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+
+    <app-card>
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">📅 Recent Activity</h3>
+      <div class="space-y-3">
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+          <div class="text-sm">
+            <div class="text-gray-900 dark:text-white font-medium">New order received</div>
+            <div class="text-gray-500 dark:text-gray-400">Order #1234 - $156.99</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+          <div class="text-sm">
+            <div class="text-gray-900 dark:text-white font-medium">User registration</div>
+            <div class="text-gray-500 dark:text-gray-400">john.doe&#64;example.com</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-yellow-500 rounded-full"></div>
+          <div class="text-sm">
+            <div class="text-gray-900 dark:text-white font-medium">Product updated</div>
+            <div class="text-gray-500 dark:text-gray-400">Wireless Headphones</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+          <div class="text-sm">
+            <div class="text-gray-900 dark:text-white font-medium">Low stock alert</div>
+            <div class="text-gray-500 dark:text-gray-400">Smart Watch - 5 left</div>
+          </div>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

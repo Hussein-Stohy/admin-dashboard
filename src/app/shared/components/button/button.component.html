@@ -1,0 +1,8 @@
+<button [type]="type" [disabled]="disabled || loading" [class]="buttonClasses" (click)="handleClick($event)">
+    <div class="flex items-center justify-center gap-2">
+        <div *ngIf="loading" class="animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full">
+        </div>
+        <ng-content select="[slot=icon]"></ng-content>
+        <span *ngIf="!iconOnly"><ng-content></ng-content></span>
+    </div>
+</button>

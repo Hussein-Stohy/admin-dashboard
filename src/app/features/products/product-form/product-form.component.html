@@ -1,0 +1,154 @@
+<div class="max-w-2xl mx-auto space-y-6">
+    <!-- Header -->
+    <div class="flex items-center space-x-4">
+        <button (click)="goBack()"
+            class="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+                {{ isEditing ? 'Edit Product' : 'Create Product' }}
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+                {{ isEditing ? 'Update product information' : 'Add a new product to your inventory' }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <app-card>
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <!-- Basic Information -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Basic Information</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <app-form-field label="Product Name" [required]="true">
+                        <input type="text" formControlName="name" [class]="getInputClasses('name')"
+                            placeholder="Enter product name" />
+                        <div *ngIf="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+                            class="mt-1 text-sm text-red-600 dark:text-red-400">
+                            <span *ngIf="productForm.get('name')?.hasError('required')">Product name is required</span>
+                            <span *ngIf="productForm.get('name')?.hasError('minlength')">Product name must be at least 2
+                                characters</span>
+                        </div>
+                    </app-form-field>
+
+                    <app-form-field label="Category" [required]="true">
+                        <select formControlName="category" [class]="getInputClasses('category')">
+                            <option value="">Select a category</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Home & Kitchen">Home & Kitchen</option>
+                            <option value="Sports & Outdoors">Sports & Outdoors</option>
+                            <option value="Home & Garden">Home & Garden</option>
+                            <option value="Bags & Luggage">Bags & Luggage</option>
+                            <option value="Books">Books</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Beauty & Personal Care">Beauty & Personal Care</option>
+                            <option value="Toys & Games">Toys & Games</option>
+                            <option value="Automotive">Automotive</option>
+                        </select>
+                        <div *ngIf="productForm.get('category')?.invalid && productForm.get('category')?.touched"
+                            class="mt-1 text-sm text-red-600 dark:text-red-400">
+                            Category is required
+                        </div>
+                    </app-form-field>
+                </div>
+
+                <app-form-field label="Description" [required]="true">
+                    <textarea formControlName="description" [class]="getInputClasses('description')" rows="4"
+                        placeholder="Enter product description">
+              </textarea>
+                    <div *ngIf="productForm.get('description')?.invalid && productForm.get('description')?.touched"
+                        class="mt-1 text-sm text-red-600 dark:text-red-400">
+                        <span *ngIf="productForm.get('description')?.hasError('required')">Description is
+                            required</span>
+                        <span *ngIf="productForm.get('description')?.hasError('minlength')">Description must be at least
+                            10 characters</span>
+                    </div>
+                </app-form-field>
+
+                <app-form-field label="Image URL">
+                    <input type="url" formControlName="imageUrl" [class]="getInputClasses('imageUrl')"
+                        placeholder="https://example.com/image.jpg" />
+                    <div *ngIf="productForm.get('imageUrl')?.invalid && productForm.get('imageUrl')?.touched"
+                        class="mt-1 text-sm text-red-600 dark:text-red-400">
+                        Please enter a valid URL
+                    </div>
+                </app-form-field>
+            </div>
+
+            <!-- Pricing & Inventory -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Pricing & Inventory</h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <app-form-field label="Price" [required]="true">
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm">$</span>
+                            </div>
+                            <input type="number" formControlName="price" [class]="getInputClasses('price', 'pl-8')"
+                                placeholder="0.00" step="0.01" min="0" />
+                        </div>
+                        <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched"
+                            class="mt-1 text-sm text-red-600 dark:text-red-400">
+                            <span *ngIf="productForm.get('price')?.hasError('required')">Price is required</span>
+                            <span *ngIf="productForm.get('price')?.hasError('min')">Price must be greater than 0</span>
+                        </div>
+                    </app-form-field>
+
+                    <app-form-field label="Stock Quantity" [required]="true">
+                        <input type="number" formControlName="stock" [class]="getInputClasses('stock')" placeholder="0"
+                            min="0" />
+                        <div *ngIf="productForm.get('stock')?.invalid && productForm.get('stock')?.touched"
+                            class="mt-1 text-sm text-red-600 dark:text-red-400">
+                            <span *ngIf="productForm.get('stock')?.hasError('required')">Stock quantity is
+                                required</span>
+                            <span *ngIf="productForm.get('stock')?.hasError('min')">Stock must be 0 or greater</span>
+                        </div>
+                    </app-form-field>
+
+                    <app-form-field label="Status" [required]="true">
+                        <select formControlName="status" [class]="getInputClasses('status')">
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                            <option value="discontinued">Discontinued</option>
+                        </select>
+                    </app-form-field>
+                </div>
+            </div>
+
+            <!-- Image Preview -->
+            <div *ngIf="productForm.get('imageUrl')?.value" class="space-y-4">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Image Preview</h3>
+                <div class="flex justify-center">
+                    <img [src]="productForm.get('imageUrl')?.value"
+                        [alt]="productForm.get('name')?.value || 'Product preview'"
+                        class="w-48 h-48 object-cover rounded-lg border border-gray-200 dark:border-gray-700"
+                        (error)="onImageError($event)" />
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-6">
+                <app-button type="submit" variant="primary" [disabled]="productForm.invalid || loading()"
+                    [loading]="loading()" class="w-full sm:w-auto">
+                    {{ isEditing ? 'Update Product' : 'Create Product' }}
+                </app-button>
+
+                <app-button type="button" variant="outline" (click)="goBack()" [disabled]="loading()"
+                    class="w-full sm:w-auto">
+                    Cancel
+                </app-button>
+
+                <app-button *ngIf="isEditing" type="button" variant="danger" (click)="deleteProduct()"
+                    [disabled]="loading()" class="w-full sm:w-auto sm:ml-auto">
+                    Delete Product
+                </app-button>
+            </div>
+        </form>
+    </app-card>
+</div>

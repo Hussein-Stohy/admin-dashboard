@@ -1,0 +1,60 @@
+/* Header specific styles */
+.header-button {
+  @apply p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors;
+}
+
+/* User menu animation */
+.user-dropdown {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Notification badge */
+.notification-badge {
+  @apply absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* User avatar */
+.user-avatar {
+  @apply w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center text-white text-sm font-medium;
+}
+
+/* Theme toggle animation */
+.theme-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.theme-icon:hover {
+  transform: rotate(180deg);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .header-actions {
+    @apply space-x-2;
+  }
+  
+  .user-dropdown {
+    @apply right-0 left-auto w-40;
+  }
+}

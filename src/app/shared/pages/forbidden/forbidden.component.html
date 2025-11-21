@@ -1,0 +1,88 @@
+<div class="min-h-screen flex items-center justify-center px-4">
+    <app-card class="max-w-md w-full text-center">
+        <!-- 403 Illustration -->
+        <div class="mb-8">
+            <div class="text-9xl font-bold text-gray-200 dark:text-gray-700 mb-4">
+                403
+            </div>
+            <div class="text-6xl mb-4">🚫</div>
+        </div>
+
+        <!-- Error Message -->
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Access Forbidden
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">
+                Sorry, you don't have permission to access this resource. Your current role or permissions level doesn't
+                allow you to view this page.
+            </p>
+        </div>
+
+        <!-- Permissions Info -->
+        <div class="mb-8 text-left">
+            <h3 class="text-sm font-medium text-gray-900 dark:text-white mb-3">
+                What you can do:
+            </h3>
+            <ul class="text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                <li>• Check with your administrator for access</li>
+                <li>• Verify your user role and permissions</li>
+                <li>• Go back to an allowed area</li>
+                <li>• Contact support for help</li>
+            </ul>
+        </div>
+
+        <!-- Permission Details -->
+        <div class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+            <div class="flex items-center">
+                <svg class="w-5 h-5 text-red-600 dark:text-red-400 mr-2" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+                <div class="text-sm">
+                    <p class="font-medium text-red-800 dark:text-red-300">Access Restricted</p>
+                    <p class="text-red-700 dark:text-red-400">You need higher privileges to view this content.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="space-y-3">
+            <app-button variant="primary" [routerLink]="['/dashboard']" class="w-full">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Go to Dashboard
+            </app-button>
+
+            <app-button variant="outline" (click)="goBack()" class="w-full">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+                Go Back
+            </app-button>
+        </div>
+
+        <!-- Help Section -->
+        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+            <div class="space-y-2">
+                <p class="text-xs text-gray-500 dark:text-gray-400">
+                    Need higher access?
+                    <a href="mailto:admin@yourapp.com"
+                        class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium">
+                        Contact Administrator
+                    </a>
+                </p>
+                <p class="text-xs text-gray-500 dark:text-gray-400">
+                    Having issues?
+                    <a href="mailto:support@yourapp.com"
+                        class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium">
+                        Contact Support
+                    </a>
+                </p>
+            </div>
+        </div>
+    </app-card>
+</div>

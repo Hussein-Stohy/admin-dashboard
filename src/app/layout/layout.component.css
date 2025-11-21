@@ -1,0 +1,32 @@
+/* Layout specific styles */
+.main-content {
+  transition: margin-left 300ms ease-in-out;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .main-content {
+    @apply ml-0;
+  }
+  
+  .sidebar-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-30;
+  }
+}
+
+/* Scrollbar styling */
+main::-webkit-scrollbar {
+  width: 6px;
+}
+
+main::-webkit-scrollbar-track {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+main::-webkit-scrollbar-thumb {
+  @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500 dark:bg-gray-500;
+}

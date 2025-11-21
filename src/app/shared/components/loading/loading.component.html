@@ -1,0 +1,23 @@
+<div [class]="containerClasses">
+    <!-- Spinner -->
+    <div *ngIf="type === 'spinner'" class="flex justify-center">
+        <div [class]="spinnerClasses"></div>
+    </div>
+
+    <!-- Skeleton -->
+    <div *ngIf="type === 'skeleton'" class="animate-pulse space-y-4">
+        <div *ngFor="let line of [].constructor(skeletonLines); let i = index" [class]="getSkeletonLineClasses(i)">
+        </div>
+    </div>
+
+    <!-- Dots -->
+    <div *ngIf="type === 'dots'" class="flex justify-center space-x-2">
+        <div *ngFor="let dot of [1,2,3]; let i = index" class="w-2 h-2 bg-primary-600 rounded-full animate-bounce"
+            [style.animation-delay]="i * 0.1 + 's'"></div>
+    </div>
+
+    <!-- Text -->
+    <p *ngIf="text" class="mt-2 text-sm text-gray-600 dark:text-gray-400 text-center">
+        {{ text }}
+    </p>
+</div>

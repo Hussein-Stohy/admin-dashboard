@@ -1,0 +1,98 @@
+/* Dashboard specific styles */
+.stats-grid {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6;
+}
+
+/* Stat card animations */
+.stat-card {
+  @apply hover:shadow-lg transition-all duration-200 cursor-pointer;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Chart container */
+.chart-container {
+  @apply relative h-64 w-full;
+}
+
+.chart-placeholder {
+  @apply flex items-center justify-center h-full text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded-lg border-2 border-dashed border-gray-200 dark:border-gray-700;
+}
+
+/* Activity item styles */
+.activity-item {
+  @apply flex items-start space-x-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors;
+}
+
+.activity-icon {
+  @apply w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0;
+}
+
+.activity-icon.user {
+  @apply bg-blue-100 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400;
+}
+
+.activity-icon.order {
+  @apply bg-green-100 text-green-600 dark:bg-green-900/20 dark:text-green-400;
+}
+
+.activity-icon.system {
+  @apply bg-purple-100 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400;
+}
+
+.activity-icon.default {
+  @apply bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400;
+}
+
+/* Quick actions */
+.quick-action-btn {
+  @apply w-full justify-start text-left hover:shadow-md transition-all duration-200;
+}
+
+.quick-action-btn:hover {
+  transform: translateX(4px);
+}
+
+/* Loading animations */
+.skeleton-pulse {
+  @apply animate-pulse bg-gray-300 dark:bg-gray-600;
+}
+
+.loading-shimmer {
+  animation: shimmer 2s infinite linear;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .stats-grid {
+    @apply grid-cols-1 gap-4;
+  }
+  
+  .chart-container {
+    @apply h-48;
+  }
+}
+
+/* Dark mode specific adjustments */
+@media (prefers-color-scheme: dark) {
+  .chart-placeholder {
+    background-image: radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2%, transparent 0%);
+    background-size: 50px 50px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .quick-actions,
+  .activity-actions {
+    @apply hidden;
+  }
+}

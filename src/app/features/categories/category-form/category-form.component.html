@@ -1,0 +1,153 @@
+<div class="max-w-2xl mx-auto space-y-6">
+    <!-- Header -->
+    <div class="flex items-center space-x-4">
+        <button (click)="goBack()"
+            class="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <div>
+            <h1 class="text-2xl font-bold text-gray-900 dark:text-white">
+                {{ isEditing ? 'Edit Category' : 'Create Category' }}
+            </h1>
+            <p class="text-gray-600 dark:text-gray-400 mt-1">
+                {{ isEditing ? 'Update category information' : 'Add a new product category' }}
+            </p>
+        </div>
+    </div>
+
+    <!-- Form -->
+    <app-card>
+        <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()" class="space-y-6">
+            <!-- Basic Information -->
+            <div class="space-y-4">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Category Information</h3>
+
+                <app-form-field label="Category Name" [required]="true">
+                    <input type="text" formControlName="name" [class]="getInputClasses('name')"
+                        placeholder="Enter category name" />
+                    <div *ngIf="categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched"
+                        class="mt-1 text-sm text-red-600 dark:text-red-400">
+                        <span *ngIf="categoryForm.get('name')?.hasError('required')">Category name is required</span>
+                        <span *ngIf="categoryForm.get('name')?.hasError('minlength')">Category name must be at least 2
+                            characters</span>
+                    </div>
+                </app-form-field>
+
+                <app-form-field label="Description" [required]="true">
+                    <textarea formControlName="description" [class]="getInputClasses('description')" rows="3"
+                        placeholder="Enter category description">
+              </textarea>
+                    <div *ngIf="categoryForm.get('description')?.invalid && categoryForm.get('description')?.touched"
+                        class="mt-1 text-sm text-red-600 dark:text-red-400">
+                        <span *ngIf="categoryForm.get('description')?.hasError('required')">Description is
+                            required</span>
+                        <span *ngIf="categoryForm.get('description')?.hasError('minlength')">Description must be at
+                            least 10 characters</span>
+                    </div>
+                </app-form-field>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <app-form-field label="Icon" [required]="true">
+                        <select formControlName="icon" [class]="getInputClasses('icon')">
+                            <option value="">Select an icon</option>
+                            <option value="📱">📱 Electronics</option>
+                            <option value="🏠">🏠 Home & Kitchen</option>
+                            <option value="⚽">⚽ Sports & Outdoors</option>
+                            <option value="👕">👕 Clothing</option>
+                            <option value="📚">📚 Books</option>
+                            <option value="💄">💄 Beauty & Personal Care</option>
+                            <option value="🎮">🎮 Toys & Games</option>
+                            <option value="🚗">🚗 Automotive</option>
+                            <option value="🌱">🌱 Home & Garden</option>
+                            <option value="🎒">🎒 Bags & Luggage</option>
+                            <option value="🎵">🎵 Music</option>
+                            <option value="🍽️">🍽️ Food & Beverages</option>
+                            <option value="💊">💊 Health & Wellness</option>
+                            <option value="🔧">🔧 Tools & Hardware</option>
+                            <option value="📷">📷 Photography</option>
+                            <option value="🎨">🎨 Arts & Crafts</option>
+                        </select>
+                        <div *ngIf="categoryForm.get('icon')?.invalid && categoryForm.get('icon')?.touched"
+                            class="mt-1 text-sm text-red-600 dark:text-red-400">
+                            Icon is required
+                        </div>
+                    </app-form-field>
+
+                    <app-form-field label="Color" [required]="true">
+                        <div class="flex space-x-3">
+                            <input type="color" formControlName="color"
+                                class="w-12 h-10 border border-gray-300 dark:border-gray-600 rounded-md cursor-pointer" />
+                            <input type="text" formControlName="color" [class]="getInputClasses('color')"
+                                placeholder="#3B82F6" class="flex-1" />
+                        </div>
+                        <div *ngIf="categoryForm.get('color')?.invalid && categoryForm.get('color')?.touched"
+                            class="mt-1 text-sm text-red-600 dark:text-red-400">
+                            <span *ngIf="categoryForm.get('color')?.hasError('required')">Color is required</span>
+                            <span *ngIf="categoryForm.get('color')?.hasError('pattern')">Please enter a valid hex
+                                color</span>
+                        </div>
+                    </app-form-field>
+                </div>
+
+                <app-form-field label="Status" [required]="true">
+                    <select formControlName="status" [class]="getInputClasses('status')">
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </app-form-field>
+
+                <div *ngIf="isEditing">
+                    <app-form-field label="Product Count">
+                        <input type="number" formControlName="productCount" [class]="getInputClasses('productCount')"
+                            min="0" />
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                            Number of products in this category
+                        </p>
+                    </app-form-field>
+                </div>
+            </div>
+
+            <!-- Preview -->
+            <div *ngIf="categoryForm.get('name')?.value || categoryForm.get('icon')?.value" class="space-y-4">
+                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Preview</h3>
+                <div class="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center text-xl"
+                            [style.background-color]="categoryForm.get('color')?.value || '#3B82F6'"
+                            [style.color]="getContrastColor(categoryForm.get('color')?.value || '#3B82F6')">
+                            {{ categoryForm.get('icon')?.value || '📦' }}
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-gray-900 dark:text-white">
+                                {{ categoryForm.get('name')?.value || 'Category Name' }}
+                            </h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                                {{ categoryForm.get('description')?.value || 'Category description will appear here' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex flex-col sm:flex-row gap-3 pt-6">
+                <app-button type="submit" variant="primary" [disabled]="categoryForm.invalid || loading()"
+                    [loading]="loading()" class="w-full sm:w-auto">
+                    {{ isEditing ? 'Update Category' : 'Create Category' }}
+                </app-button>
+
+                <app-button type="button" variant="outline" (click)="goBack()" [disabled]="loading()"
+                    class="w-full sm:w-auto">
+                    Cancel
+                </app-button>
+
+                <app-button *ngIf="isEditing" type="button" variant="danger" (click)="deleteCategory()"
+                    [disabled]="loading()" class="w-full sm:w-auto sm:ml-auto">
+                    Delete Category
+                </app-button>
+            </div>
+        </form>
+    </app-card>
+</div>

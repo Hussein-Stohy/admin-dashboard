@@ -1,0 +1,31 @@
+<div class="space-y-2">
+    <label *ngIf="label" [for]="id" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        {{ label }}
+        <span *ngIf="required" class="text-red-500 ml-1">*</span>
+    </label>
+
+    <div class="relative">
+        <input *ngIf="type !== 'textarea'" [id]="id" [type]="type" [placeholder]="placeholder" [disabled]="disabled"
+            [readonly]="readonly" [value]="value" [class]="inputClasses" (input)="onInput($event)" (blur)="onBlur()"
+            (focus)="onFocus()" />
+
+        <textarea *ngIf="type === 'textarea'" [id]="id" [placeholder]="placeholder" [disabled]="disabled"
+            [readonly]="readonly" [rows]="rows" [value]="value" [class]="inputClasses" (input)="onInput($event)"
+            (blur)="onBlur()" (focus)="onFocus()"></textarea>
+
+        <!-- Icon -->
+        <div *ngIf="hasIcon" class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <ng-content select="[slot=icon]"></ng-content>
+        </div>
+    </div>
+
+    <!-- Error message -->
+    <p *ngIf="error && showError" class="text-sm text-red-600 dark:text-red-400">
+        {{ error }}
+    </p>
+
+    <!-- Helper text -->
+    <p *ngIf="helperText && !error" class="text-sm text-gray-500 dark:text-gray-400">
+        {{ helperText }}
+    </p>
+</div>

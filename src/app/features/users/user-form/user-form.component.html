@@ -1,0 +1,54 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <app-form-field label="Full Name" placeholder="Enter full name" formControlName="name" [required]="true"
+        [error]="getFieldError('name')" />
+
+    <app-form-field label="Email Address" type="email" placeholder="Enter email address" formControlName="email"
+        [required]="true" [error]="getFieldError('email')" />
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Role <span class="text-red-500">*</span>
+        </label>
+        <select class="input-field" formControlName="role">
+            <option value="" disabled>Select a role</option>
+            <option value="Admin">Admin</option>
+            <option value="Manager">Manager</option>
+            <option value="Editor">Editor</option>
+            <option value="User">User</option>
+        </select>
+        <p *ngIf="getFieldError('role')" class="text-sm text-red-600 dark:text-red-400 mt-1">
+            {{ getFieldError('role') }}
+        </p>
+    </div>
+
+    <div>
+        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Status <span class="text-red-500">*</span>
+        </label>
+        <div class="flex space-x-4">
+            <label class="flex items-center">
+                <input type="radio" value="active" formControlName="status"
+                    class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300" />
+                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Active</span>
+            </label>
+            <label class="flex items-center">
+                <input type="radio" value="inactive" formControlName="status"
+                    class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300" />
+                <span class="ml-2 text-sm text-gray-700 dark:text-gray-300">Inactive</span>
+            </label>
+        </div>
+        <p *ngIf="getFieldError('status')" class="text-sm text-red-600 dark:text-red-400 mt-1">
+            {{ getFieldError('status') }}
+        </p>
+    </div>
+
+    <!-- Form actions -->
+    <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <app-button type="button" variant="secondary" (clicked)="onCancel()">
+            Cancel
+        </app-button>
+        <app-button type="submit" variant="primary" [loading]="loading" [disabled]="userForm.invalid">
+            {{ user ? 'Update User' : 'Create User' }}
+        </app-button>
+    </div>
+</form>
