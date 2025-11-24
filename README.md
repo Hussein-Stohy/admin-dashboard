@@ -36,33 +36,6 @@ A **cutting-edge administrative dashboard** built with Angular 18, designed for 
 
 ---
 
-## 📸 Application Screenshots
-
-<div align="center">
-
-### 🏠 Dashboard Overview
-![Dashboard](https://via.placeholder.com/800x450/1f2937/ffffff?text=Dashboard+Overview)
-
-### 👥 User Management
-<table>
-  <tr>
-    <td><img src="https://via.placeholder.com/400x250/3b82f6/ffffff?text=User+List" alt="User List"/></td>
-    <td><img src="https://via.placeholder.com/400x250/10b981/ffffff?text=User+Form" alt="User Form"/></td>
-  </tr>
-</table>
-
-### 📊 Analytics & Reports
-<table>
-  <tr>
-    <td><img src="https://via.placeholder.com/400x250/f59e0b/ffffff?text=Analytics" alt="Analytics"/></td>
-    <td><img src="https://via.placeholder.com/400x250/ef4444/ffffff?text=Reports" alt="Reports"/></td>
-  </tr>
-</table>
-
-</div>
-
----
-
 ## ✨ Feature Matrix
 
 ### 🟢 Core Features (Implemented)
